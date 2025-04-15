@@ -1,0 +1,23 @@
+@use "./styles/variables" as *
+@use "./styles/media" as *
+
+.app
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.content
+  display: flex
+  flex-direction: column
+  gap: 50px
+  max-width: $view-width-lg
+  padding-inline: 16px
+
+  +breakpoint(xs)
+    max-width: $view-width-xs
+
+  +breakpoint(sm)
+    max-width: $view-width-sm
+
+  +breakpoint(md)
+    max-width: $view-width-md
