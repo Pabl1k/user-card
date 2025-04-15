@@ -1,0 +1,17 @@
+@use "../../styles/variables" as *
+
+.button
+  min-width: 100px
+  height: 34px
+  cursor: pointer
+  background-color: $color-yellow-primary
+  border: none
+  border-radius: 80px
+
+  &:hover
+    background-color: $color-yellow-hover
+
+  &:disabled
+    background-color: $color-disabled
+    color: $color-white
+    cursor: not-allowed
