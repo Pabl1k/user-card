@@ -1,0 +1,15 @@
+@use './variables' as *
+
+=breakpoint($value)
+  @if $value == xs
+    @media (max-width: $breakpoint-xs)
+      @content
+  @else if $value == sm
+    @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm)
+      @content
+  @else if $value == md
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md)
+      @content
+  @else if $value == lg
+    @media (min-width: $breakpoint-lg)
+      @content
