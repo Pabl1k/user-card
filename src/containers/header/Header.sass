@@ -1,0 +1,33 @@
+@use "../../styles/variables" as *
+@use "../../styles/media" as *
+
+.header
+  display: flex
+  justify-content: center
+  width: 100vw
+  height: 60px
+  background-color: $color-white
+
+.header_container
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  max-width: $view-width-lg
+  padding-inline: 16px
+
+  +breakpoint(xs)
+    max-width: $view-width-xs
+
+  +breakpoint(sm)
+    max-width: $view-width-sm
+
+  +breakpoint(md)
+    max-width: $view-width-md
+
+  img
+    width: 104px
+
+.header_buttons
+  display: flex
+  gap: 10px

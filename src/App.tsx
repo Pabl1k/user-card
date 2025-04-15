@@ -1,8 +1,10 @@
+import Header from './containers/header/Header';
+
 const App = () => {
   return (
-    <div>
-      React + Vite starter
-    </div>
+    <>
+      <Header />
+    </>
   );
 };
 
