@@ -1,6 +1,5 @@
 import Button from '../../components/button/Button';
 import EmployeeCard from '../../components/employeeCard/EmployeeCard';
-import Title from '../../components/title/Title';
 import './Employees.sass';
 
 const Employees = () => {
@@ -16,8 +15,7 @@ const Employees = () => {
   };
 
   return (
-    <div className="employees">
-      <Title>Working with GET request</Title>
+    <>
       <div className="employees_list">
         <EmployeeCard
           name={employeeTest.name}
@@ -29,7 +27,7 @@ const Employees = () => {
       </div>
 
       <Button label="Show more" />
-    </div>
+    </>
   );
 };
 
