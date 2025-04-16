@@ -1,5 +1,6 @@
 import { FC, SyntheticEvent } from 'react';
 import avatarImage from '../../assets/avatar.svg';
+import './Avatar.sass';
 
 interface Props {
   photoSrc: string;
@@ -11,11 +12,7 @@ const Avatar: FC<Props> = ({ photoSrc }) => {
     e.currentTarget.src = avatarImage;
   };
 
-  return (
-    <div className="avatar">
-      <img src={photoSrc} alt="avatar" onError={handleDefaultAvatar} />
-    </div>
-  );
+  return <img className="avatar" src={photoSrc} alt="avatar" onError={handleDefaultAvatar} />;
 };
 
 export default Avatar;
