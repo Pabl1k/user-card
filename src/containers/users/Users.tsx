@@ -1,16 +1,16 @@
 import { useApi } from '../../api/useApi';
 import Button from '../../components/button/Button';
-import EmployeeCard from '../../components/employeeCard/EmployeeCard';
-import './Employees.sass';
+import UserCard from '../../components/userCard/UserCard';
+import './Users.sass';
 
-const Employees = () => {
+const Users = () => {
   const { users, lastPageReached, increaseCurrentPage } = useApi();
 
   return (
     <>
       <div className="employees_list">
         {users.map((user) => (
-          <EmployeeCard
+          <UserCard
             key={user.id}
             name={user.name}
             position={user.position}
@@ -26,4 +26,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default Users;
