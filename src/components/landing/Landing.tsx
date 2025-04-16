@@ -1,11 +1,12 @@
 import Button from '../button/Button';
+import Title from '../title/Title';
 import './Landing.sass';
 
 const Landing = () => {
   return (
     <div className="landing">
       <div className="landing_text_container">
-        <h1>Test assignment for front-end developer</h1>
+        <Title>Test assignment for front-end developer</Title>
         <span>
           What defines a good front-end developer is one that has skilled knowledge of HTML, CSS, JS
           with a vast understanding of User design thinking as they'll be building web interfaces
