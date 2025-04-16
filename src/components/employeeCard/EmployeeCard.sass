@@ -1,0 +1,24 @@
+@use "../../styles/variables" as *
+
+.employeeCard
+  background-color: $color-white
+  min-width: 282px
+  border-radius: 10px
+  padding: 20px
+
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+  gap: 20px
+
+  span
+    max-width: 330px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+.employeeCard_info
+  display: flex
+  flex-direction: column
+  text-align: center
