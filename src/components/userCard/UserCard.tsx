@@ -10,8 +10,8 @@ interface Props {
   photo: string;
 }
 
-const formatPhoneNumber = (phoneNumber: string) => {
-  const match = phoneNumber.match(/^\+(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/);
+const formatPhoneNumber = (phoneNumber?: string) => {
+  const match = phoneNumber && phoneNumber.match(/^\+(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/);
 
   if (!match) {
     return phoneNumber;
