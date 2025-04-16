@@ -1,4 +1,5 @@
 @use "../../styles/variables" as *
+@use "../../styles/media" as *
 
 .landing
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../assets/landing.jpeg')
@@ -6,14 +7,25 @@
   background-position: center
   background-repeat: no-repeat
   width: 100%
+  max-width: 1024px
   height: 650px
   display: flex
   flex-direction: column
   justify-content: center
   align-items: center
+  padding: 0 32px 32px
+
+  +breakpoint(xs)
+   justify-content: flex-start
+   height: 500px
 
 .landing_text_container
-  width: 380px
+  max-width: 380px
   color: $color-white
-  margin-bottom: 21px
   text-align: center
+  margin: 0 32px 21px 32px
+
+  +breakpoint(xs)
+   max-width: 328px
+   margin: 16px 0 21px 0
+

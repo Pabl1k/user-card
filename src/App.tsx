@@ -8,9 +8,8 @@ const App = () => {
   return (
     <div className="app">
       <Header />
+      <Landing />
       <div className="content">
-        <Landing />
-
         <Section title="Working with GET request">
           <Employees />
         </Section>

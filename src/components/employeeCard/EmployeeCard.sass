@@ -1,22 +1,35 @@
 @use "../../styles/variables" as *
+@use "../../styles/media" as *
 
 .employeeCard
   background-color: $color-white
-  min-width: 282px
   border-radius: 10px
   padding: 20px
-
+  flex: 1 1 250px
+  max-width: 370px
   display: flex
   flex-direction: column
   justify-content: space-between
   align-items: center
   gap: 20px
 
+  +breakpoint(sm)
+    max-width: 265px
+
+  +breakpoint(md)
+    max-width: 230px
+
   span
-    max-width: 330px
+    max-width: 304px
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
+
+    +breakpoint(sm)
+     max-width: 250px
+
+    +breakpoint(md)
+      max-width: 230px
 
 .employeeCard_info
   display: flex
