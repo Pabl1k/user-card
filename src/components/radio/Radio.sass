@@ -1,0 +1,40 @@
+@use "../../styles/variables" as *
+
+.radio
+  display: flex
+  align-items: center
+  height: 26px
+
+  input[type='radio']
+    display: none
+
+  &__dot
+    width: 20px
+    height: 20px
+    border: 1px solid $color-border
+    border-radius: 50%
+    display: inline-block
+    position: relative
+    transition: all 0.2s ease
+
+    &::after
+      content: ''
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 10px
+      height: 10px
+      border-radius: 50%
+      background-color: $color-secondary
+      opacity: 0
+      transition: all 0.2s ease
+
+  input[type='radio']:checked + .radio__dot
+   border-color: $color-secondary
+
+  input[type='radio']:checked + .radio__dot::after
+   opacity: 1
+
+  &__title
+    margin-left: 16px
