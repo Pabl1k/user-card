@@ -1,4 +1,4 @@
-import { UsersResponse } from './types';
+import { PositionsResponse, UsersResponse } from './types';
 
 const API_URL = 'https://frontend-test-assignment-api.abz.agency/api/v1';
 const COUNT_SIZE = 6;
@@ -12,4 +12,15 @@ export const getUsers = async (page: number): Promise<UsersResponse> => {
   }
 
   return (await response.json()) as UsersResponse;
+};
+
+export const getPositions = async () => {
+  const response = await fetch(`${API_URL}/positions`);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Failed to fetch positions: ${response.status} - ${errorText}`);
+  }
+
+  return (await response.json()) as PositionsResponse;
 };

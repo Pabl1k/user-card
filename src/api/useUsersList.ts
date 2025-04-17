@@ -13,7 +13,7 @@ const initialState: UsersState = {
 const isControlledError = (error: unknown) =>
   error && typeof error === 'object' && 'message' in error && typeof error.message === 'string';
 
-export const useApi = () => {
+export const useUsersList = () => {
   const [usersState, setUsersState] = useState<UsersState>(initialState);
 
   const fetchUsers = async () => {

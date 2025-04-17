@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePositions } from '../../api/usePositions';
 import { formatPhoneNumber } from '../../common/utils';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
@@ -26,28 +27,10 @@ const initialUserData: Record<FieldName, string> = {
   phone: ''
 };
 
-const positions = [
-  {
-    id: 1,
-    name: 'Lawyer'
-  },
-  {
-    id: 2,
-    name: 'Content manager'
-  },
-  {
-    id: 3,
-    name: 'Security'
-  },
-  {
-    id: 4,
-    name: 'Designer'
-  }
-]; // API
-
 const Registration = () => {
+  const { positions } = usePositions();
   const [newUserData, setNewUserData] = useState(initialUserData);
-  const [selectedPositionId, setSelectedPositionId] = useState(positions[0].id);
+  const [selectedPositionId, setSelectedPositionId] = useState<number | null>(null);
 
   const handleChange = (fieldName: FieldName) => (newValue: string) => {
     setNewUserData((prevState) => ({
@@ -80,15 +63,19 @@ const Registration = () => {
       <div className="registration__position">
         <span>Select your position</span>
         <div className="registration__positions-list">
-          {positions.map(({ id, name }) => (
-            <Radio
-              key={id}
-              id={id}
-              checked={selectedPositionId === id}
-              label={name}
-              onSelect={setSelectedPositionId}
-            />
-          ))}
+          {positions.map(({ id, name }, index) => {
+            const checked = selectedPositionId ? selectedPositionId === id : index === 0;
+
+            return (
+              <Radio
+                key={id}
+                id={id}
+                checked={checked}
+                label={name}
+                onSelect={setSelectedPositionId}
+              />
+            );
+          })}
         </div>
       </div>
 
