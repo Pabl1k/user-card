@@ -24,20 +24,26 @@ export interface UsersResponse {
   users: User[];
 }
 
-interface GetUserParams {
-  page: number;
-  count: number;
-}
-
-export interface Error {
+export interface ResponseError {
   success: boolean;
   message: string;
   fails?: Record<string, string[]>;
 }
 
-export interface State {
+export interface UsersState {
   users: User[];
   loading: boolean;
-  error: Error | null;
+  error: ResponseError | null;
   lastPageReached: boolean;
+  currentPage: number;
+}
+
+export interface Position {
+  id: number;
+  name: string;
+}
+
+export interface PositionsResponse {
+  success: boolean;
+  positions: Position[];
 }
