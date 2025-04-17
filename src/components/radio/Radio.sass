@@ -4,6 +4,7 @@
   display: flex
   align-items: center
   height: 26px
+  cursor: pointer
 
   input[type='radio']
     display: none
@@ -35,6 +36,9 @@
 
   input[type='radio']:checked + .radio__dot::after
    opacity: 1
+
+  &:hover input[type='radio']:not(:checked) + .radio__dot
+    border-color: $color-secondary
 
   &__title
     margin-left: 16px

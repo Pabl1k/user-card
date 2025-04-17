@@ -2,10 +2,10 @@ import { FC } from 'react';
 import './Radio.sass';
 
 interface Props {
-  id: string;
+  id: number;
   checked: boolean;
   label: string;
-  onSelect: (selectedId: string) => void;
+  onSelect: (selectedId: number) => void;
 }
 
 const Radio: FC<Props> = ({ id, checked, label, onSelect }) => {
