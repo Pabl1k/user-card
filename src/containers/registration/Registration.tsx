@@ -7,10 +7,18 @@ import Radio from '../../components/radio/Radio';
 import Uploader from '../../components/uploader/Uploader';
 import './Registration.sass';
 
-type FieldName = 'userName' | 'email' | 'phone';
+interface UserData {
+  userName: string;
+  email: string;
+  phone: string;
+  positionId: number | null;
+  image: Blob | null;
+}
+
+type FieldName = keyof UserData;
 
 interface Field {
-  id: FieldName;
+  id: 'userName' | 'email' | 'phone';
   label: string;
   helperText?: string;
 }
@@ -21,23 +29,27 @@ const fields: Field[] = [
   { id: 'phone', label: 'Phone', helperText: '+38 (XXX) XXX - XX - XX' }
 ];
 
-const initialUserData: Record<FieldName, string> = {
+const initialUserData: UserData = {
   userName: '',
   email: '',
-  phone: ''
+  phone: '',
+  positionId: null,
+  image: null
 };
 
 const Registration = () => {
   const { positions } = usePositions();
   const [newUserData, setNewUserData] = useState(initialUserData);
-  const [selectedPositionId, setSelectedPositionId] = useState<number | null>(null);
 
-  const handleChange = (fieldName: FieldName) => (newValue: string) => {
-    setNewUserData((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldName === 'phone' ? newValue.replace(/(?!^\+)[^\d-]/g, '') : newValue
-    }));
-  };
+  const handleChange =
+    <K extends FieldName>(fieldName: K) =>
+    (newValue: UserData[K]) => {
+      setNewUserData((prevState) => ({
+        ...prevState,
+        [fieldName]:
+          fieldName === 'phone' ? (newValue as string).replace(/(?!^\+)[^\d-]/g, '') : newValue
+      }));
+    };
 
   return (
     <div className="registration">
@@ -64,7 +76,7 @@ const Registration = () => {
         <span>Select your position</span>
         <div className="registration__positions-list">
           {positions.map(({ id, name }, index) => {
-            const checked = selectedPositionId ? selectedPositionId === id : index === 0;
+            const checked = newUserData.positionId ? newUserData.positionId === id : index === 0;
 
             return (
               <Radio
@@ -72,7 +84,7 @@ const Registration = () => {
                 id={id}
                 checked={checked}
                 label={name}
-                onSelect={setSelectedPositionId}
+                onSelect={handleChange('positionId')}
               />
             );
           })}
@@ -80,7 +92,7 @@ const Registration = () => {
       </div>
 
       <div className="registration__uploader-container">
-        <Uploader />
+        <Uploader onUpload={handleChange('image')} />
       </div>
 
       <div className="registration__button-container">
