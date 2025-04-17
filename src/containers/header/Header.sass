@@ -8,13 +8,13 @@
   height: 60px
   background-color: $color-white
 
-.header_container
-  display: flex
-  justify-content: space-between
-  align-items: center
-  width: 100%
-  max-width: $view-width-lg
-  padding-inline: 16px
+  &__container
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    max-width: $view-width-lg
+    padding-inline: 16px
 
   +breakpoint(xs)
     max-width: $view-width-xs
@@ -28,6 +28,6 @@
   img
     width: 104px
 
-.header_buttons
-  display: flex
-  gap: 10px
+  &__buttons
+    display: flex
+    gap: 10px

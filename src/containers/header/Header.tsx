@@ -5,7 +5,7 @@ import './Header.sass';
 const Header = () => {
   return (
     <div className="header">
-      <div className="header_container">
+      <div className="header__container">
         <img src={logo} alt="logo" />
         <div className="header_buttons">
           <Button label="Users" />

@@ -1,18 +1,18 @@
 @use '../../styles/variables' as *
 
-.input-group
+.input
   position: relative
   display: flex
   flex-direction: column
 
-  input
+  &__field
     background-color: transparent
     border-radius: 4px
     border: 1px solid #D0CFCF
     outline: none
     padding: 16px
 
-  label
+  &__label
     position: absolute
     top: 0
     padding: 12px
@@ -20,27 +20,27 @@
     transition: all 0.3s ease
     color: #7E7E7E
 
-.input-group :is(input:focus, input:valid) ~ label
-  transform: translateY(-50%)
-  background-color: $color-background
-  padding-inline: 4px
-  margin-left: 12px
-  line-height: $line-height-xs
-  font-size: $font-size-xs
+  &__helper-text
+    margin-top: 3px
+    margin-left: 12px
+    color: #7E7E7E
+    line-height: $line-height-xs
+    font-size: $font-size-xs
 
-.helper-text
-  margin-top: 3px
-  margin-left: 12px
-  color: #7E7E7E
-  line-height: $line-height-xs
-  font-size: $font-size-xs
+  :is(.input__field:focus, .input__field:valid) ~ .input__label
+    transform: translateY(-50%)
+    background-color: $color-background
+    padding-inline: 4px
+    margin-left: 12px
+    line-height: $line-height-xs
+    font-size: $font-size-xs
 
-.input-group-error
-  input
-    border: 1px solid $color-error
+  &--error
+    .input__field
+      border: 1px solid $color-error
 
-  label
-    color: $color-error
+    .input__label
+      color: $color-error
 
-  .helper-text
-    color: $color-error
+    .input__helper-text
+      color: $color-error

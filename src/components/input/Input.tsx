@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FC } from 'react';
 import './Input.sass';
 
@@ -10,13 +11,21 @@ interface Props {
 }
 
 const Input: FC<Props> = ({ label, value, helperText, errorText, onChange }) => {
-  const helperTextValue = errorText ?? helperText;
+  const helperTextValue = errorText || helperText;
 
   return (
-    <div className={`input-group ${errorText ? 'input-group-error' : ''}`}>
-      <input required autoComplete="off" value={value} onChange={(e) => onChange(e.target.value)} />
-      <label htmlFor={label}>{label}</label>
-      {helperTextValue && <span className="helper-text">{helperTextValue}</span>}
+    <div className={clsx('input', errorText && 'input--error')}>
+      <input
+        required
+        autoComplete="off"
+        className="input__field"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <label htmlFor={label} className="input__label">
+        {label}
+      </label>
+      {helperTextValue && <span className="input__helper-text">{helperTextValue}</span>}
     </div>
   );
 };

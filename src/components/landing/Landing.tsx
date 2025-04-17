@@ -5,7 +5,7 @@ import './Landing.sass';
 const Landing = () => {
   return (
     <div className="landing">
-      <div className="landing_text_container">
+      <div className="landing__text-container">
         <Title>Test assignment for front-end developer</Title>
         <span>
           What defines a good front-end developer is one that has skilled knowledge of HTML, CSS, JS

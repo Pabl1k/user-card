@@ -9,7 +9,7 @@ const App = () => {
     <div className="app">
       <Header />
       <Landing />
-      <div className="content">
+      <div className="app__content">
         <Section title="Working with GET request">
           <Users />
         </Section>

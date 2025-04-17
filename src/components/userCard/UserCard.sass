@@ -1,7 +1,7 @@
 @use "../../styles/variables" as *
 @use "../../styles/media" as *
 
-.employeeCard
+.employee-card
   background-color: $color-white
   border-radius: 10px
   padding: 20px
@@ -26,12 +26,12 @@
     white-space: nowrap
 
     +breakpoint(sm)
-     max-width: 250px
+      max-width: 250px
 
     +breakpoint(md)
       max-width: 230px
 
-.employeeCard_info
-  display: flex
-  flex-direction: column
-  text-align: center
+  &__info
+    display: flex
+    flex-direction: column
+    text-align: center

@@ -23,11 +23,11 @@ const formatPhoneNumber = (phoneNumber?: string) => {
 
 const UserCard: FC<Props> = ({ name, email, phone, position, photo }) => {
   return (
-    <div className="employeeCard">
+    <div className="employee-card">
       <Avatar photoSrc={photo} />
       <span>{name}</span>
 
-      <div className="employeeCard_info">
+      <div className="employee-card__info">
         <span>{position}</span>
         <span>{email}</span>
         <span>{formatPhoneNumber(phone)}</span>
