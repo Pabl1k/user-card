@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { getPositions, registerUser } from '../../api/endpoints';
 import { CreateUserData, Position } from '../../api/types';
 import { formatPhoneNumber } from '../../common/utils';
@@ -7,6 +7,10 @@ import Input from '../../components/input/Input';
 import Radio from '../../components/radio/Radio';
 import Uploader from '../../components/uploader/Uploader';
 import './Registration.sass';
+
+interface Props {
+  onRegistration: () => Promise<void>;
+}
 
 interface UserData {
   name: string;
@@ -40,7 +44,7 @@ const initialUserData: UserData = {
 
 const isButtonDisabled = (userData: UserData) => Object.values(userData).some((value) => !value);
 
-const Registration = () => {
+const Registration: FC<Props> = ({ onRegistration }) => {
   const [positions, setPositions] = useState<Position[]>([]);
   const [newUserData, setNewUserData] = useState(initialUserData);
 
@@ -62,7 +66,7 @@ const Registration = () => {
     const params: CreateUserData = {
       name: newUserData.name,
       email: newUserData.email,
-      phone: newUserData.phone,
+      phone: newUserData.phone.replace(/(?!^\+)[^\d-]/g, ''),
       position_id: newUserData.positionId,
       photo: newUserData.image
     };
@@ -70,8 +74,10 @@ const Registration = () => {
     const newUser = await registerUser(params);
 
     if (newUser?.success) {
-      // update list
+      await onRegistration();
     }
+
+    setNewUserData(initialUserData);
   };
 
   useEffect(() => {
@@ -118,8 +124,8 @@ const Registration = () => {
       <div className="registration__position">
         <span>Select your position</span>
         <div className="registration__positions-list">
-          {positions.map(({ id, name }, index) => {
-            const checked = newUserData.positionId ? newUserData.positionId === id : index === 0;
+          {positions.map(({ id, name }) => {
+            const checked = newUserData.positionId === id;
 
             return (
               <Radio

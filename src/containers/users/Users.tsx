@@ -1,11 +1,16 @@
-import { useUsersList } from '../../api/useUsersList';
+import { FC } from 'react';
+import { UsersListReturn } from '../../api/useUsersList';
 import Button from '../../components/button/Button';
 import Spinner from '../../components/spinner/Spinner';
 import UserCard from '../../components/userCard/UserCard';
 import './Users.sass';
 
-const Users = () => {
-  const { users, loading, lastPageReached, increaseCurrentPage } = useUsersList();
+interface Props {
+  usersList: UsersListReturn;
+}
+
+const Users: FC<Props> = ({ usersList }) => {
+  const { users, loading, lastPageReached, increaseCurrentPage } = usersList;
 
   return (
     <>
