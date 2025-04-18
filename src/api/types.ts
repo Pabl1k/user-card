@@ -47,3 +47,17 @@ export interface PositionsResponse {
   success: boolean;
   positions: Position[];
 }
+
+export interface CreateUserData {
+  name: string;
+  email: string;
+  phone: string;
+  position_id: number;
+  photo: File;
+}
+
+export interface RegisterUserResponse {
+  success: boolean;
+  user_id: number;
+  message: string;
+}

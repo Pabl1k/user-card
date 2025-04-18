@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { usePositions } from '../../api/usePositions';
+import { useEffect, useState } from 'react';
+import { getPositions, registerUser } from '../../api/endpoints';
+import { CreateUserData, Position } from '../../api/types';
 import { formatPhoneNumber } from '../../common/utils';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
@@ -8,37 +9,39 @@ import Uploader from '../../components/uploader/Uploader';
 import './Registration.sass';
 
 interface UserData {
-  userName: string;
+  name: string;
   email: string;
   phone: string;
   positionId: number | null;
-  image: Blob | null;
+  image: File | null;
 }
 
 type FieldName = keyof UserData;
 
 interface Field {
-  id: 'userName' | 'email' | 'phone';
+  id: 'name' | 'email' | 'phone';
   label: string;
   helperText?: string;
 }
 
 const fields: Field[] = [
-  { id: 'userName', label: 'Your name' },
+  { id: 'name', label: 'Your name' },
   { id: 'email', label: 'Email' },
   { id: 'phone', label: 'Phone', helperText: '+38 (XXX) XXX - XX - XX' }
 ];
 
 const initialUserData: UserData = {
-  userName: '',
+  name: '',
   email: '',
   phone: '',
   positionId: null,
   image: null
 };
 
+const isButtonDisabled = (userData: UserData) => Object.values(userData).some((value) => !value);
+
 const Registration = () => {
-  const { positions } = usePositions();
+  const [positions, setPositions] = useState<Position[]>([]);
   const [newUserData, setNewUserData] = useState(initialUserData);
 
   const handleChange =
@@ -50,6 +53,46 @@ const Registration = () => {
           fieldName === 'phone' ? (newValue as string).replace(/(?!^\+)[^\d-]/g, '') : newValue
       }));
     };
+
+  const handleSignUp = async () => {
+    if (!newUserData.image || !newUserData.positionId) {
+      return;
+    }
+
+    const params: CreateUserData = {
+      name: newUserData.name,
+      email: newUserData.email,
+      phone: newUserData.phone,
+      position_id: newUserData.positionId,
+      photo: newUserData.image
+    };
+
+    const newUser = await registerUser(params);
+
+    if (newUser?.success) {
+      // update list
+    }
+  };
+
+  useEffect(() => {
+    const fetchPositions = async () => {
+      try {
+        const data = await getPositions();
+
+        if (data.success) {
+          setPositions(data.positions);
+          setNewUserData((prevState) => ({
+            ...prevState,
+            positionId: data.positions[0].id
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching positions:', error);
+      }
+    };
+
+    fetchPositions();
+  }, []);
 
   return (
     <div className="registration">
@@ -96,7 +139,7 @@ const Registration = () => {
       </div>
 
       <div className="registration__button-container">
-        <Button label="Sign up" disabled={true} onClick={() => console.log('')} />
+        <Button label="Sign up" disabled={isButtonDisabled(newUserData)} onClick={handleSignUp} />
       </div>
     </div>
   );
