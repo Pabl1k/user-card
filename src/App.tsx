@@ -1,10 +1,10 @@
 import './App.sass';
-import { useUsersList } from './api/useUsersList';
 import Landing from './components/landing/Landing';
 import Header from './containers/header/Header';
 import Registration from './containers/registration/Registration';
 import Section from './containers/section/Section';
 import Users from './containers/users/Users';
+import { useUsersList } from './hooks/useUsersList';
 
 const App = () => {
   const usersList = useUsersList();

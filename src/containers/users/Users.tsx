@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { UsersListReturn } from '../../api/useUsersList';
 import Button from '../../components/button/Button';
 import Spinner from '../../components/spinner/Spinner';
 import UserCard from '../../components/userCard/UserCard';
+import { UsersListReturn } from '../../hooks/useUsersList';
 import './Users.sass';
 
 interface Props {

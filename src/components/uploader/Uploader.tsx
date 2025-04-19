@@ -9,7 +9,9 @@ interface Props {
 
 const MAX_SIZE = 5_242_880; // 5 MB
 
-const errorMapper = {
+type ErrorKey = 'fileExt' | 'fileSize' | 'uploadFail';
+
+const errorMapper: Record<ErrorKey, string> = {
   fileExt: 'The photo format must be jpeg/jpg type',
   fileSize: 'File size must not be greater than 5 Mb',
   uploadFail: 'Failed to upload file'
@@ -17,41 +19,42 @@ const errorMapper = {
 
 const Uploader: FC<Props> = ({ onUpload }) => {
   const [fileName, setFileName] = useState<string>('');
-  const [error, setError] = useState('');
+  const [errorKey, setErrorKey] = useState<ErrorKey | ''>('');
 
   const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setFileName(file?.name || '');
-    setError('');
+    setErrorKey('');
 
     if (!file) {
-      setError(errorMapper.uploadFail);
+      setErrorKey('uploadFail');
       return;
     }
 
     if (!isFileExtensionAccepted(file?.name)) {
-      setError(errorMapper.fileExt);
+      setErrorKey('fileExt');
       return;
     }
 
     if (file && file.size >= MAX_SIZE) {
-      setError(errorMapper.fileSize);
+      setErrorKey('fileSize');
       return;
     }
 
     onUpload(file);
+    setFileName('');
   };
 
   return (
     <>
-      <div className={clsx('uploader', error && 'uploader--error')}>
+      <div className={clsx('uploader', errorKey && 'uploader--error')}>
         <label htmlFor="file-upload" className="uploader__button">
           Upload
           <input id="file-upload" type="file" onChange={handleUpload} />
         </label>
         <div className="uploader__text">{fileName || 'Upload your photo'}</div>
       </div>
-      {error && <span className="uploader__error-text">{error}</span>}
+      {errorKey && <span className="uploader__error-text">{errorMapper[errorKey]}</span>}
     </>
   );
 };

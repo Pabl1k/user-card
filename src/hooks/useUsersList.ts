@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getUsers } from './endpoints';
-import { ResponseError, UsersState } from './types';
+import { getUsers } from '../api/endpoints';
+import { ResponseError, UsersState } from '../api/types';
 
 const initialState: UsersState = {
   users: [],
