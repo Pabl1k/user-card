@@ -12,8 +12,16 @@ interface Props {
 }
 
 const Registration: FC<Props> = ({ onRegistration }) => {
-  const { positions, newUserData, inputFields, handleChange, handleSignUp, isButtonDisabled } =
-    useRegistration(onRegistration);
+  const {
+    positions,
+    newUserData,
+    inputFields,
+    errors,
+    handleChange,
+    handleSignUp,
+    isButtonDisabled,
+    validateField
+  } = useRegistration(onRegistration);
 
   return (
     <div className="registration">
@@ -30,6 +38,8 @@ const Registration: FC<Props> = ({ onRegistration }) => {
               value={value}
               label={field.label}
               helperText={field.helperText}
+              errorText={errors[field.id]}
+              onBlur={() => validateField(field.id)}
               onChange={handleChange(field.id)}
             />
           );

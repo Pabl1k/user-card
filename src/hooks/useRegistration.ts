@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getPositions, registerUser } from '../api/endpoints';
 import { CreateUserData, Position } from '../api/types';
+import { useValidation } from './useValidation';
 
-interface NewUserData {
+export interface NewUserData {
   name: string;
   email: string;
   phone: string;
@@ -11,7 +12,7 @@ interface NewUserData {
 }
 
 type FieldName = keyof NewUserData;
-type InputFieldName = 'name' | 'email' | 'phone';
+export type InputFieldName = 'name' | 'email' | 'phone';
 
 export interface Field {
   id: InputFieldName;
@@ -33,11 +34,13 @@ const initialUserData: NewUserData = {
   image: null
 };
 
-const isButtonDisabled = (userData: NewUserData) => Object.values(userData).some((value) => !value);
-
 export const useRegistration = (onRegistration: () => Promise<void>) => {
   const [positions, setPositions] = useState<Position[]>([]);
   const [newUserData, setNewUserData] = useState(initialUserData);
+  const { errors, errorExist, validateField } = useValidation(newUserData);
+
+  const isButtonDisabled = (userData: NewUserData) =>
+    Object.values(userData).some((value) => !value) || errorExist;
 
   const handleChange =
     <K extends FieldName>(fieldName: K) =>
@@ -45,7 +48,7 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
       setNewUserData((prevState) => ({
         ...prevState,
         [fieldName]:
-          fieldName === 'phone' ? (newValue as string).replace(/(?!^\+)[^\d-]/g, '') : newValue
+          fieldName === 'phone' ? (newValue as string).replace(/[a-zA-Z]/g, '') : newValue
       }));
     };
 
@@ -65,10 +68,9 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
     const newUser = await registerUser(params);
 
     if (newUser?.success) {
+      setNewUserData({ ...initialUserData, positionId: positions[0]?.id || null });
       await onRegistration();
     }
-
-    setNewUserData({ ...initialUserData, positionId: positions[0]?.id || null });
   };
 
   useEffect(() => {
@@ -95,8 +97,10 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
     positions,
     newUserData,
     inputFields,
+    errors,
     handleChange,
     handleSignUp,
-    isButtonDisabled
+    isButtonDisabled,
+    validateField
   };
 };
