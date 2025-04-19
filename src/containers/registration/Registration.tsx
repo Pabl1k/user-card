@@ -56,7 +56,7 @@ const Registration: FC<Props> = ({ onRegistration }) => {
       </div>
 
       <div className="registration__uploader-container">
-        <Uploader onUpload={handleChange('image')} />
+        <Uploader uploadedFileName={newUserData.image?.name} onUpload={handleChange('image')} />
       </div>
 
       <div className="registration__button-container">
