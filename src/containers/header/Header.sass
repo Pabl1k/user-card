@@ -4,7 +4,7 @@
 .header
   display: flex
   justify-content: center
-  width: 100vw
+  min-width: 100%
   height: 60px
   background-color: $color-white
 
@@ -16,14 +16,14 @@
     max-width: $view-width-lg
     padding-inline: 16px
 
-  +breakpoint(xs)
-    max-width: $view-width-xs
+    +breakpoint(xs)
+     padding-inline: 8px
 
-  +breakpoint(sm)
-    max-width: $view-width-sm
+    +breakpoint(sm)
+      padding-inline: 16px
 
-  +breakpoint(md)
-    max-width: $view-width-md
+    +breakpoint(md)
+      padding-inline: 32px
 
   img
     width: 104px
