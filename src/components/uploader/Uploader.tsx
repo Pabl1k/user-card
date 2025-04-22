@@ -52,7 +52,6 @@ const Uploader: FC<Props> = ({ uploadedFileName, onUpload }) => {
     const objectUrl = URL.createObjectURL(file);
 
     img.onload = () => {
-      console.log('Image dimensions:', img.width, img.height);
       if (img.width < 70 || img.height < 70) {
         setErrorKey('fileMinSize');
         URL.revokeObjectURL(objectUrl);
