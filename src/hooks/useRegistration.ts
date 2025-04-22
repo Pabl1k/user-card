@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPositions, registerUser } from '../api/endpoints';
 import { CreateUserData, Position } from '../api/types';
+import { clearPhoneNumber } from '../common/utils';
 import { useValidation } from './useValidation';
 
 export interface NewUserData {
@@ -65,7 +66,7 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
     const params: CreateUserData = {
       name: newUserData.name,
       email: newUserData.email,
-      phone: newUserData.phone.replace(/(?!^\+)[^\d-]/g, ''),
+      phone: clearPhoneNumber(newUserData.phone),
       position_id: newUserData.positionId,
       photo: newUserData.image
     };

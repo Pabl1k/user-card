@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { clearPhoneNumber } from '../common/utils';
 import { InputFieldName } from './useRegistration';
 
 const RFC2822FormatRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -17,7 +18,7 @@ const errorMapper = {
 };
 
 const isValid = (fieldName: InputFieldName, value: string) => {
-  const clearedPhoneNumber = value.replace(/[^\d]/g, '');
+  const clearedPhoneNumber = clearPhoneNumber(value);
 
   if (fieldName === 'name') {
     return value.length >= 2 && value.length <= 60;

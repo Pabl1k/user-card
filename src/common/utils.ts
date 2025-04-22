@@ -21,3 +21,5 @@ export const isFileExtensionAccepted = (fileName?: string) => {
 
   return acceptedExtensions.includes(fileExtension);
 };
+
+export const clearPhoneNumber = (value: string) => value.replace(/[^\d]/g, '');
