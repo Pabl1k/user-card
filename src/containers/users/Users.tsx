@@ -14,7 +14,7 @@ const Users: FC<Props> = ({ usersList }) => {
 
   return (
     <>
-      <div className="employees_list">
+      <div className="users_list">
         {users.map((user) => (
           <UserCard key={user.id} {...user} />
         ))}

@@ -13,19 +13,21 @@ interface Props {
 }
 
 const UserCard: FC<Props> = ({ name, email, phone, position, photo }) => {
+  const phoneNumberStart = phone.startsWith('+') ? phone : `+${phone}`;
+
   return (
-    <div className="employee-card">
+    <div className="user-card">
       <Avatar photoSrc={photo} />
       <Tooltip text={name}>
         <span>{name}</span>
       </Tooltip>
 
-      <div className="employee-card__info">
+      <div className="user-card__info">
         <span>{position}</span>
         <Tooltip text={email}>
           <span>{email}</span>
         </Tooltip>
-        <span>{formatPhoneNumber(phone)}</span>
+        <span>{formatPhoneNumber(phoneNumberStart)}</span>
       </div>
     </div>
   );
