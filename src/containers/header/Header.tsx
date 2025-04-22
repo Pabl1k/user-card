@@ -12,7 +12,7 @@ const Header: FC<Props> = ({ onUsersClick, onSignUpClick }) => {
   return (
     <div className="header">
       <div className="header__container">
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" className="header__logo" />
         <div className="header__buttons">
           <Button label="Users" onClick={onUsersClick} />
           <Button label="Sign up" onClick={onSignUpClick} />

@@ -27,6 +27,7 @@ const Input: FC<Props> = ({
     <div className={clsx(errorText && 'input--error')}>
       <div className="input">
         <input
+          id={label}
           required
           autoComplete="off"
           className="input__field"

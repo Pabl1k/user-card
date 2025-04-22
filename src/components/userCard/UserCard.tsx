@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { formatPhoneNumber } from '../../common/utils';
 import Avatar from '../avatar/Avatar';
 import Tooltip from '../tooltip/Tooltip';
@@ -31,4 +31,4 @@ const UserCard: FC<Props> = ({ name, email, phone, position, photo }) => {
   );
 };
 
-export default UserCard;
+export default memo(UserCard);
