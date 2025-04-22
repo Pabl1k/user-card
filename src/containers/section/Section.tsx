@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import Title from '../../components/title/Title';
 import './Section.sass';
 
@@ -7,13 +7,13 @@ interface Props {
   children: ReactNode;
 }
 
-const Section: FC<Props> = ({ title, children }) => {
+const Section = forwardRef<HTMLDivElement, Props>(({ title, children }, ref) => {
   return (
-    <div className="section">
+    <div className="section" ref={ref}>
       <Title>{title}</Title>
       {children}
     </div>
   );
-};
+});
 
 export default Section;

@@ -1,8 +1,13 @@
+import { FC } from 'react';
 import Button from '../button/Button';
 import Title from '../title/Title';
 import './Landing.sass';
 
-const Landing = () => {
+interface Props {
+  onSignUpClick: () => void;
+}
+
+const Landing: FC<Props> = ({ onSignUpClick }) => {
   return (
     <div className="landing">
       <div className="landing__text-container">
@@ -14,7 +19,7 @@ const Landing = () => {
           Front-End Development keeps evolving.
         </span>
       </div>
-      <Button label="Sign up" />
+      <Button label="Sign up" onClick={onSignUpClick} />
     </div>
   );
 };
