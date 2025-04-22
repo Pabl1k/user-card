@@ -18,9 +18,9 @@ const Registration: FC<Props> = ({ onRegistration }) => {
     inputFields,
     errors,
     handleChange,
+    handleInputChange,
     handleSignUp,
-    isButtonDisabled,
-    validateField
+    isButtonDisabled
   } = useRegistration(onRegistration);
 
   return (
@@ -39,8 +39,7 @@ const Registration: FC<Props> = ({ onRegistration }) => {
               label={field.label}
               helperText={field.helperText}
               errorText={errors[field.id]}
-              onBlur={() => validateField(field.id)}
-              onChange={handleChange(field.id)}
+              onChange={handleInputChange(field.id)}
             />
           );
         })}

@@ -37,7 +37,7 @@ const initialUserData: NewUserData = {
 export const useRegistration = (onRegistration: () => Promise<void>) => {
   const [positions, setPositions] = useState<Position[]>([]);
   const [newUserData, setNewUserData] = useState(initialUserData);
-  const { errors, errorExist, validateField } = useValidation(newUserData);
+  const { errors, errorExist, validateField } = useValidation();
 
   const isButtonDisabled = (userData: NewUserData) =>
     Object.values(userData).some((value) => !value) || errorExist;
@@ -51,6 +51,11 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
           fieldName === 'phone' ? (newValue as string).replace(/[a-zA-Z]/g, '') : newValue
       }));
     };
+
+  const handleInputChange = (fieldName: InputFieldName) => (newValue: string) => {
+    handleChange(fieldName)(newValue);
+    validateField(fieldName, newValue);
+  };
 
   const handleSignUp = async () => {
     if (!newUserData.image || !newUserData.positionId) {
@@ -99,8 +104,8 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
     inputFields,
     errors,
     handleChange,
+    handleInputChange,
     handleSignUp,
-    isButtonDisabled,
-    validateField
+    isButtonDisabled
   };
 };

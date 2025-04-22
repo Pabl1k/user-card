@@ -7,11 +7,10 @@ interface Props {
   value: string;
   helperText?: string;
   errorText?: string;
-  onBlur: () => void;
   onChange: (newValue: string) => void;
 }
 
-const Input: FC<Props> = ({ label, value, helperText, errorText, onBlur, onChange }) => {
+const Input: FC<Props> = ({ label, value, helperText, errorText, onChange }) => {
   const helperTextValue = errorText || helperText;
 
   return (
@@ -22,7 +21,6 @@ const Input: FC<Props> = ({ label, value, helperText, errorText, onBlur, onChang
           autoComplete="off"
           className="input__field"
           value={value}
-          onBlur={onBlur}
           onChange={(e) => onChange(e.target.value)}
         />
         <label htmlFor={label} className="input__label">
