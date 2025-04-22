@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPositions, registerUser } from '../api/endpoints';
 import { CreateUserData, Position } from '../api/types';
 import { clearPhoneNumber } from '../common/utils';
+import { InputMode } from '../components/input/Input';
 import { useValidation } from './useValidation';
 
 export interface NewUserData {
@@ -18,13 +19,14 @@ export type InputFieldName = 'name' | 'email' | 'phone';
 export interface Field {
   id: InputFieldName;
   label: string;
+  type: InputMode;
   helperText?: string;
 }
 
 const inputFields: Field[] = [
-  { id: 'name', label: 'Your name' },
-  { id: 'email', label: 'Email' },
-  { id: 'phone', label: 'Phone', helperText: '+38 (XXX) XXX - XX - XX' }
+  { id: 'name', label: 'Your name', type: 'text' },
+  { id: 'email', label: 'Email', type: 'email' },
+  { id: 'phone', label: 'Phone', type: 'tel', helperText: '+38 (XXX) XXX - XX - XX' }
 ];
 
 const initialUserData: NewUserData = {
@@ -43,13 +45,21 @@ export const useRegistration = (onRegistration: () => Promise<void>) => {
   const isButtonDisabled = (userData: NewUserData) =>
     Object.values(userData).some((value) => !value) || errorExist;
 
+  const handlePhoneNumberEnter = (value: string) => {
+    if (!value) {
+      return '';
+    }
+
+    const digits = value.replace(/[a-zA-Z]/g, '');
+    return value.startsWith('+') ? digits : `+${digits}`;
+  };
+
   const handleChange =
     <K extends FieldName>(fieldName: K) =>
     (newValue: NewUserData[K]) => {
       setNewUserData((prevState) => ({
         ...prevState,
-        [fieldName]:
-          fieldName === 'phone' ? (newValue as string).replace(/[a-zA-Z]/g, '') : newValue
+        [fieldName]: fieldName === 'phone' ? handlePhoneNumberEnter(newValue as string) : newValue
       }));
     };
 

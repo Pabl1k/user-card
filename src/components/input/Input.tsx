@@ -2,15 +2,25 @@ import clsx from 'clsx';
 import { FC } from 'react';
 import './Input.sass';
 
+export type InputMode = 'text' | 'email' | 'tel';
+
 interface Props {
   label: string;
   value: string;
   helperText?: string;
   errorText?: string;
+  inputMode?: InputMode;
   onChange: (newValue: string) => void;
 }
 
-const Input: FC<Props> = ({ label, value, helperText, errorText, onChange }) => {
+const Input: FC<Props> = ({
+  label,
+  value,
+  helperText,
+  errorText,
+  inputMode = 'text',
+  onChange
+}) => {
   const helperTextValue = errorText || helperText;
 
   return (
@@ -20,6 +30,7 @@ const Input: FC<Props> = ({ label, value, helperText, errorText, onChange }) => 
           required
           autoComplete="off"
           className="input__field"
+          inputMode={inputMode}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
