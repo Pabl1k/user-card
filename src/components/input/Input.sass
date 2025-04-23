@@ -25,18 +25,19 @@
     transition: all 0.5s ease
     color: #7E7E7E
 
-  &__helper-text
-    margin-top: 3px
-    margin-left: 12px
-    color: #7E7E7E
-    line-height: $line-height-xs
-    font-size: $font-size-xs
-
+  // label movement on input focus
   :is(.input__field:focus, .input__field:valid) ~ .input__label
     transform: translateY(-200%)
     background-color: $color-background
     padding-inline: 4px
     margin-left: 12px
+    line-height: $line-height-xs
+    font-size: $font-size-xs
+
+  &__helper-text
+    margin-top: 3px
+    margin-left: 12px
+    color: #7E7E7E
     line-height: $line-height-xs
     font-size: $font-size-xs
 
